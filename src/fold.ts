@@ -23,7 +23,6 @@ import type { ContentBlock, StreamChunk } from '@deepseek-ai/dsh-llm'
 // Source-level import: the token-meter index does not re-export the pure
 // estimator; a package-level `/estimate` export is a formalization candidate
 // (see plan appendix A) and this scratch keeps the source path.
-import { estimateContent } from '../../../packages/llm/token-meter/src/estimate.ts'
 
 /** One session-level analytics row (sessions table). */
 export interface SessionRow {
@@ -183,6 +182,14 @@ function usageOutputTokens(usage: unknown): number | null {
 }
 
 const clamp = (value: number): number => Math.max(0, value)
+
+/**
+ * Lightweight prompt token estimate (~4 chars per token), because the
+ * token-meter npm package does not export its offline estimator.
+ */
+function estimatePromptTokens(chars: number): number {
+  return Math.ceil(chars / 4)
+}
 
 /** Text character total over text and reasoning blocks. */
 function contentChars(blocks: readonly ContentBlock[]): number {
@@ -360,7 +367,7 @@ export function foldSessionAnalytics(
           imageBlocks: counts.image,
           fileBlocks: counts.file,
           chars,
-          estTokens: estimateContent(event.data.content),
+          estTokens: estimatePromptTokens(chars),
         })
         break
       }
