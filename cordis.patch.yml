@@ -1,0 +1,4 @@
+# 插件 patch 层：按包名引用（Node 解析到已安装产物）
+- insert:
+    - id: session-analytics
+      name: '@qianmang1/dsh-session-analytics'
