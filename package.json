@@ -1,6 +1,6 @@
 {
   "name": "@qianmang1/dsh-session-analytics",
-  "version": "0.1.3-alpha.1",
+  "version": "0.1.0-dsh.0.1.3.alpha.1",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
