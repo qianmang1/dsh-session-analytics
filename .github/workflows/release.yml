@@ -17,11 +17,14 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+      - name: Version
+        id: version
+        run: echo "V=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
       - run: pnpm pack
       - uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event_name == 'push' && github.ref_name || format('v{0}', github.run_number) }}
+          tag_name: v${{ steps.version.outputs.V }}
           draft: false
           files: '*.tgz'
