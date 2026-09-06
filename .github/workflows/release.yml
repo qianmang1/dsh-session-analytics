@@ -20,7 +20,7 @@ jobs:
       - name: Version
         id: version
         run: echo "V=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --no-frozen-lockfile
       - run: pnpm run build
       - run: pnpm pack
       - uses: softprops/action-gh-release@v2
