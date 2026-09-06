@@ -2,6 +2,7 @@
   "name": "@qianmang1/dsh-session-analytics",
   "version": "0.1.0-dsh.0.1.3.alpha.1",
   "type": "module",
+  "packageManager": "pnpm@11.7.0",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
   "files": ["lib", "cordis.patch.yml"],
